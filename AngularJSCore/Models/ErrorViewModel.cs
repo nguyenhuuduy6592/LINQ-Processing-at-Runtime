@@ -1,5 +1,3 @@
-using System;
-
 namespace AngularJSCore.Models
 {
     public class ErrorViewModel
