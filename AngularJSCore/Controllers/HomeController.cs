@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebApplication3.Models;
+using AngularJSCore.Models;
 
-namespace WebApplication3.Controllers
+namespace AngularJSCore.Controllers
 {
     public class HomeController : Controller
     {

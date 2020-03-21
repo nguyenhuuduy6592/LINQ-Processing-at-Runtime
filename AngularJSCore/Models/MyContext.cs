@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AngularJS Core.Models
+namespace AngularJSCore.Models
 {
     class MyContext : DbContext
     {
