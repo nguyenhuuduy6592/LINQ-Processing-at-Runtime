@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AngularJSCore.Models
 {
     public class Customer
     {
+        [Key]
         public int CustomerID { get; set; }
         public string NameStyle { get; set; }
         public string Title { get; set; }

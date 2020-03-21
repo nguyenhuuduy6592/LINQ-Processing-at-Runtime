@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AngularJSCore.Models
 {
     public class SalesOrderHeader
     {
+        [Key]
         public int SalesOrderID { get; set; }
         public byte RevisionNumber { get; set; }
         public DateTime OrderDate { get; set; }

@@ -2,8 +2,11 @@
 
 namespace AngularJSCore.Models
 {
-    class MyContext : DbContext
+    public class MyContext : DbContext
     {
+        public MyContext(DbContextOptions options) : base(options)
+        {}
+
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerAddress> CustomerAddresses { get; set; }
@@ -18,6 +21,26 @@ namespace AngularJSCore.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("SalesLT");
+
+            modelBuilder.Entity<Address>().ToTable("Address");
+            modelBuilder.Entity<Customer>().ToTable("Customer");
+            modelBuilder.Entity<Product>().ToTable("Product");
+            modelBuilder.Entity<ProductCategory>().ToTable("ProductCategory");
+            modelBuilder.Entity<ProductDescription>().ToTable("ProductDescription");
+            modelBuilder.Entity<ProductModel>().ToTable("ProductModel");
+            modelBuilder.Entity<SalesOrderHeader>().ToTable("SalesOrderHeader");
+
+            modelBuilder.Entity<CustomerAddress>()
+                .ToTable("CustomerAddress")
+                .HasKey(x => new { x.AddressID, x.CustomerID });
+
+            modelBuilder.Entity<ProductModelProductDescription>()
+                .ToTable("ProductModelProductDescription")
+                .HasKey(x => new { x.ProductModelID, x.ProductDescriptionID });
+
+            modelBuilder.Entity<SalesOrderDetail>()
+                .ToTable("SalesOrderDetail")
+                .HasKey(x => new { x.SalesOrderID, x.SalesOrderDetailID });
         }
     }
 }
