@@ -1,0 +1,27 @@
+﻿@model AngularJSCore.ViewModels.QueryResult
+
+@{
+    ViewData["Title"] = "Custom Query";
+}
+
+<h1>Index</h1>
+
+<form id="customQuery" asp-action="Index">
+    <div class="form-group">
+        <label asp-for="Query" class="control-label"></label>
+        <textarea asp-for="Query" class="form-control"></textarea>
+        <span asp-validation-for="Query" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+</form>
+
+<div class="">
+    <ul>
+        @foreach (var address in Model.Addresses)
+        {
+            <li>@address.AddressLine1</li>
+        }
+    </ul>
+</div>
