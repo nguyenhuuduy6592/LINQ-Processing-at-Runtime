@@ -1,29 +1,24 @@
-﻿using AngularJSCore.Models;
+﻿using AngularJSCore.Helpers;
+using AngularJSCore.Models;
 using AngularJSCore.ViewModels;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using SqlLinq;
 using System.Linq;
-using AngularJSCore.Helpers;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
-namespace AngularJSCore.Controllers
+namespace AngularJS.Controllers
 {
-    public class DefaultController : Controller
+    public class HomeController : Controller
     {
-        public DefaultController(MyContext context)
-        {
-            this.context = context;
-        }
-
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View(new QueryResult());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromForm] QueryModel model)
+        public async Task<ActionResult> Index(QueryModel model)
         {
             var result = new QueryResult
             {
@@ -39,23 +34,23 @@ namespace AngularJSCore.Controllers
             var data = ParsingQueryHelpers.GetFilteredData(Addresses, CustomerAddresses, model.Query);
 
             ViewBag.ErrorMessage = "";
+            result.Addresses = data;
             return View(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index_Backup([FromForm] QueryModel model)
+        public ActionResult About()
         {
-            var result = Addresses.Query<Address, dynamic>(model.Query).ToList();
+            ViewBag.Message = "Your application description page.";
 
-            return View(new QueryResult
-            {
-                Query = model.Query,
-                Addresses = result
-            });
+            return View();
         }
 
-        private readonly MyContext context;
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
         private List<Address> Addresses = new List<Address>
         {
             new Address
