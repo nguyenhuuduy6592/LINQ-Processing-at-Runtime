@@ -32,8 +32,7 @@ namespace AngularJS.Controllers
                 return View(result);
             }
 
-            var tableName = new List<string> { "Addresses", "CustomerAddresses", "Customers" };
-            var data = ParsingQueryHelpers.GetFilteredData(tableName, model.Query);
+            var data = ParsingQueryHelpers.GetFilteredData(model.Query);
 
             ViewBag.ErrorMessage = "";
             result.Addresses = data;

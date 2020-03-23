@@ -5,6 +5,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace AngularJSCore.Helpers
 {
@@ -207,8 +208,27 @@ namespace AngularJSCore.Helpers
         /// It compiles the user query as a in memory assembly by filling it in a simple class. Once compiled,
         /// source data is passed in to the assembly instance and excution result is collected.
         /// </summary>
-        public static IEnumerable<dynamic> GetFilteredData(List<string> tableName, string userQuery)
+        public static IEnumerable<dynamic> GetFilteredData(string userQuery)
         {
+            if (string.IsNullOrEmpty(userQuery))
+            {
+                return new List<dynamic>();
+            }
+
+            userQuery = userQuery.Trim();
+            var tableList = typeof(MyDbContext).GetProperties().Select(x => x.Name).ToList();
+            MatchCollection matches = Regex.Matches(userQuery, "\\s+in\\s+(\\w+)?");
+            if (matches.Count == 0)
+            {
+                return new List<dynamic>();
+            }
+
+            var tableListFromUserQuery = matches.Cast<Match>().Select(match => match.Value.Replace(" in ", ""));
+            var tableName = (from m in tableListFromUserQuery
+                             join t in tableList on m equals t
+                             select m)
+                            .Distinct()
+                            .ToList();
             var functionParameters = string.Join(", ", tableName.Select(x => string.Format("IEnumerable<dynamic> {0}", x)));
 
             #region template Code
