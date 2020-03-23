@@ -308,13 +308,13 @@ namespace AngularJSCore.Helpers
                         switch (tableName[i])
                         {
                             case "Addresses":
-                                sourceData[i] = db.Addresses.ToList();
+                                sourceData[i] = db.Addresses.AsNoTracking().ToList();
                                 break;
                             case "CustomerAddresses":
-                                sourceData[i] = db.CustomerAddresses.ToList();
+                                sourceData[i] = db.CustomerAddresses.AsNoTracking().ToList();
                                 break;
                             case "Customers":
-                                sourceData[i] = db.Customers.ToList();
+                                sourceData[i] = db.Customers.AsNoTracking().ToList();
                                 break;
                         }
                     }
