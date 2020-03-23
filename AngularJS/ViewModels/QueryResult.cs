@@ -9,6 +9,6 @@ namespace AngularJSCore.ViewModels
         {
             Addresses = new List<dynamic>();
         }
-        public List<dynamic> Addresses { get; set; }
+        public IEnumerable<dynamic> Addresses { get; set; }
     }
 }

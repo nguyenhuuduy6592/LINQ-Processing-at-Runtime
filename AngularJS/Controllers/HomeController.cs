@@ -12,6 +12,15 @@ namespace AngularJS.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly List<dynamic> _addresses;
+        private readonly List<dynamic> _customerAddress;
+
+        public HomeController()
+        {
+            _addresses = Addresses.Cast<dynamic>().ToList();
+            _customerAddress = CustomerAddresses.Cast<dynamic>().ToList();
+        }
+
         public ActionResult Index()
         {
             return View(new QueryResult());
@@ -31,7 +40,9 @@ namespace AngularJS.Controllers
                 return View(result);
             }
 
-            var data = ParsingQueryHelpers.GetFilteredData(Addresses, CustomerAddresses, model.Query);
+            var input = new List<dynamic>[] { _addresses, _customerAddress };
+            var tableName = new List<string> { "Addresses", "CustomerAddresses" };
+            var data = ParsingQueryHelpers.GetFilteredData(input, tableName, model.Query);
 
             ViewBag.ErrorMessage = "";
             result.Addresses = data;
