@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AngularJS.Utilities;
+using System.Web.Configuration;
 using System.Web.Http;
 
 namespace AngularJS
@@ -10,6 +9,12 @@ namespace AngularJS
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            GlobalConstants.BookstoreDatabaseSettings = new ConfigModels.BookstoreDatabaseSettings
+            {
+                BooksCollectionName = WebConfigurationManager.AppSettings["BooksCollectionName"],
+                ConnectionString = WebConfigurationManager.AppSettings["ConnectionString"],
+                DatabaseName = WebConfigurationManager.AppSettings["DatabaseName"],
+            };
 
             // Web API routes
             config.MapHttpAttributeRoutes();
