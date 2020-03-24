@@ -1,12 +1,13 @@
 ﻿using AngularJS.Models;
+using AngularJS.Services;
+using AngularJS.Utilities.AutoMapperConfigs;
+using AngularJS.ViewModels;
 using AngularJSCore.Helpers;
-using AngularJSCore.Models;
 using AngularJSCore.ViewModels;
-using System;
+using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AngularJS.Controllers
@@ -37,6 +38,25 @@ namespace AngularJS.Controllers
             ViewBag.ErrorMessage = "";
             result.Addresses = data;
             return View(result);
+        }
+
+        public ActionResult GenerateCollection()
+        {
+            var config = GeneralAutoMapperConfigs.GetConfigs();
+            var mapper = new Mapper(config);
+
+            using (var db = new MyDbContext())
+            {
+                new MongoDbService<AddressModel>("Addresses")
+                    .GetCollectionWithReCreation()
+                    .InsertMany(mapper.Map<List<AddressModel>>(db.Addresses.ToList()));
+
+                new MongoDbService<CustomerModel>("Customers")
+                    .GetCollectionWithReCreation()
+                    .InsertMany(mapper.Map<List<CustomerModel>>(db.Customers.ToList()));
+            }
+
+            return Content("Ok");
         }
 
         public ActionResult About()

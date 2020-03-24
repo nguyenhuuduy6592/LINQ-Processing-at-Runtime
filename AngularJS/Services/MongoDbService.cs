@@ -10,40 +10,51 @@ namespace AngularJS.Services
     {
         public readonly IMongoDatabase Database;
         public readonly IMongoCollection<T> Collection;
+        private readonly string collectionName;
 
         public MongoDbService(string collectionName)
         {
             var client = new MongoClient(GlobalConstants.BookstoreDatabaseSettings.ConnectionString);
             Database = client.GetDatabase(GlobalConstants.BookstoreDatabaseSettings.DatabaseName);
             Collection = Database.GetCollection<T>(collectionName);
+            this.collectionName = collectionName;
         }
 
-        public void CreateCollection(string name) =>
-            Database.CreateCollection(name);
+        public void DropCollection() =>
+            Database.DropCollection(collectionName);
 
-        public IMongoCollection<T> GetCollection(string name) =>
-            Database.GetCollection<T>(name);
+        public void CreateCollection() =>
+            Database.CreateCollection(collectionName);
+
+        public IMongoCollection<T> GetCollection() =>
+            Database.GetCollection<T>(collectionName);
+
+        public IMongoCollection<T> GetCollectionWithReCreation()
+        {
+            DropCollection();
+            CreateCollection();
+            return Database.GetCollection<T>(collectionName);
+        }
 
         public List<T> Get() =>
-            Collection.Find(book => true).ToList();
+            Collection.Find(x => true).ToList();
 
         public T Get(string id) =>
-            Collection.Find(book => book.Id == id).FirstOrDefault();
+            Collection.Find(x => x.Id == id).FirstOrDefault();
 
-        public T Create(T book)
+        public T Create(T x)
         {
-            Collection.InsertOne(book);
-            return book;
+            Collection.InsertOne(x);
+            return x;
         }
 
-        public void Update(string id, T bookIn) =>
-            Collection.ReplaceOne(book => book.Id == id, bookIn);
+        public void Update(string id, T entity) =>
+            Collection.ReplaceOne(x => x.Id == id, entity);
 
-        public void Remove(T bookIn) =>
-            Collection.DeleteOne(book => book.Id == bookIn.Id);
+        public void Remove(T entity) =>
+            Collection.DeleteOne(x => x.Id == entity.Id);
 
         public void Remove(string id) =>
-            Collection.DeleteOne(book => book.Id == id);
-
+            Collection.DeleteOne(x => x.Id == id);
     }
 }
