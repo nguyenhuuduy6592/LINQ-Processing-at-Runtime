@@ -3,12 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace AngularJS.Models
 {
-    public class Book
+    public class Book : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
         [BsonElement("Name")]
         public string BookName { get; set; }
 

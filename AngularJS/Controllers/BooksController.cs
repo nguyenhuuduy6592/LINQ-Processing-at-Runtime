@@ -7,11 +7,11 @@ namespace AngularJS.Controllers
 {
     public class BooksController : ApiController
     {
-        private readonly BookService _bookService;
+        private readonly MongoDbService<Book> _bookService;
 
         public BooksController()
         {
-            _bookService = new BookService();
+            _bookService = new MongoDbService<Book>("Books");
         }
 
         public List<Book> Get()

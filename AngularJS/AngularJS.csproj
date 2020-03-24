@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Helpers\ParsingQueryHelpers.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAddress.cs" />
@@ -200,7 +201,7 @@
     <Compile Include="Models\vProductAndDescription.cs" />
     <Compile Include="Models\vProductModelCatalogDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BookService.cs" />
+    <Compile Include="Services\MongoDbService.cs" />
     <Compile Include="Utilities\GlobalConstants.cs" />
     <Compile Include="ViewModels\QueryModel.cs" />
     <Compile Include="ViewModels\QueryResult.cs" />
