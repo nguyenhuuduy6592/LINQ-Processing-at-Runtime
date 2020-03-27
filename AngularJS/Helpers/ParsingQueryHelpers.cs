@@ -317,11 +317,32 @@ namespace AngularJSCore.Helpers
                             case "Addresses":
                                 sourceData[i] = new MongoDbService<AddressViewModel>(tableName[i]).Get();
                                 break;
+                            case "Customers":
+                                sourceData[i] = new MongoDbService<CustomerViewModel>(tableName[i]).Get();
+                                break;
                             case "CustomerAddresses":
                                 sourceData[i] = new MongoDbService<CustomerAddressViewModel>(tableName[i]).Get();
                                 break;
-                            case "Customers":
-                                sourceData[i] = new MongoDbService<CustomerViewModel>(tableName[i]).Get();
+                            case "Products":
+                                sourceData[i] = new MongoDbService<ProductViewModel>(tableName[i]).Get();
+                                break;
+                            case "ProductCategories":
+                                sourceData[i] = new MongoDbService<ProductCategoryViewModel>(tableName[i]).Get();
+                                break;
+                            case "ProductDescriptions":
+                                sourceData[i] = new MongoDbService<ProductDescriptionViewModel>(tableName[i]).Get();
+                                break;
+                            case "ProductModels":
+                                sourceData[i] = new MongoDbService<ProductModelViewModel>(tableName[i]).Get();
+                                break;
+                            case "ProductModelProductDescriptions":
+                                sourceData[i] = new MongoDbService<ProductModelProductDescriptionViewModel>(tableName[i]).Get();
+                                break;
+                            case "SalesOrderDetails":
+                                sourceData[i] = new MongoDbService<SalesOrderDetailViewModel>(tableName[i]).Get();
+                                break;
+                            case "SalesOrderHeaders":
+                                sourceData[i] = new MongoDbService<SalesOrderHeaderViewModel>(tableName[i]).Get();
                                 break;
                         }
                     }
