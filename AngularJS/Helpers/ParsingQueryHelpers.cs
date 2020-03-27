@@ -315,13 +315,13 @@ namespace AngularJSCore.Helpers
                         switch (tableName[i])
                         {
                             case "Addresses":
-                                sourceData[i] = new MongoDbService<AddressModel>(tableName[i]).Get();
+                                sourceData[i] = new MongoDbService<AddressViewModel>(tableName[i]).Get();
                                 break;
                             case "CustomerAddresses":
-                                sourceData[i] = new MongoDbService<CustomerAddressModel>(tableName[i]).Get();
+                                sourceData[i] = new MongoDbService<CustomerAddressViewModel>(tableName[i]).Get();
                                 break;
                             case "Customers":
-                                sourceData[i] = new MongoDbService<CustomerModel>(tableName[i]).Get();
+                                sourceData[i] = new MongoDbService<CustomerViewModel>(tableName[i]).Get();
                                 break;
                         }
                     }

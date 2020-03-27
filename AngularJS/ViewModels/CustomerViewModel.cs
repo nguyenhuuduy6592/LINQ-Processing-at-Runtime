@@ -3,7 +3,7 @@ using System;
 
 namespace AngularJS.ViewModels
 {
-    public partial class CustomerModel : BaseEntity
+    public partial class CustomerViewModel : BaseEntity
     {
         public int CustomerID { get; set; }
 

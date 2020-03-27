@@ -207,11 +207,18 @@
     <Compile Include="Services\MongoDbService.cs" />
     <Compile Include="Utilities\AutoMapperConfigs\GeneralAutoMapperConfigs.cs" />
     <Compile Include="Utilities\GlobalConstants.cs" />
-    <Compile Include="ViewModels\AddressModel.cs" />
-    <Compile Include="ViewModels\CustomerAddressModel.cs" />
-    <Compile Include="ViewModels\CustomerModel.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\CustomerAddressViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\ProductCategoryViewModel.cs" />
+    <Compile Include="ViewModels\ProductDescriptionViewModel.cs" />
+    <Compile Include="ViewModels\ProductModelViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\ProductModelProductDescriptionViewModel.cs" />
     <Compile Include="ViewModels\QueryModel.cs" />
     <Compile Include="ViewModels\QueryResult.cs" />
+    <Compile Include="ViewModels\SalesOrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\SalesOrderHeaderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
