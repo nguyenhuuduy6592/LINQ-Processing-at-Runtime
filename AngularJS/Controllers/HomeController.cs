@@ -65,6 +65,48 @@ namespace AngularJS.Controllers
                     new MongoDbService<CustomerAddressViewModel>("CustomerAddresses")
                         .InsertMany(mapper.Map<List<CustomerAddressViewModel>>(db.CustomerAddresses.ToList()));
                 }
+
+                if (validationMongoDbService.IsCollectionExist("Products"))
+                {
+                    new MongoDbService<ProductViewModel>("Products")
+                        .InsertMany(mapper.Map<List<ProductViewModel>>(db.Products.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("ProductCategories"))
+                {
+                    new MongoDbService<ProductCategoryViewModel>("ProductCategories")
+                        .InsertMany(mapper.Map<List<ProductCategoryViewModel>>(db.ProductCategories.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("ProductDescriptions"))
+                {
+                    new MongoDbService<ProductDescriptionViewModel>("ProductDescriptions")
+                        .InsertMany(mapper.Map<List<ProductDescriptionViewModel>>(db.ProductDescriptions.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("ProductModels"))
+                {
+                    new MongoDbService<ProductModelViewModel>("ProductModels")
+                        .InsertMany(mapper.Map<List<ProductModelViewModel>>(db.ProductModels.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("ProductModelProductDescriptions"))
+                {
+                    new MongoDbService<ProductModelProductDescriptionViewModel>("ProductModelProductDescriptions")
+                        .InsertMany(mapper.Map<List<ProductModelProductDescriptionViewModel>>(db.ProductModelProductDescriptions.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("SalesOrderDetails"))
+                {
+                    new MongoDbService<SalesOrderDetailViewModel>("SalesOrderDetails")
+                        .InsertMany(mapper.Map<List<SalesOrderDetailViewModel>>(db.SalesOrderDetails.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("SalesOrderHeaders"))
+                {
+                    new MongoDbService<SalesOrderHeaderViewModel>("SalesOrderHeaders")
+                        .InsertMany(mapper.Map<List<SalesOrderHeaderViewModel>>(db.SalesOrderHeaders.ToList()));
+                }
             }
 
             return Content("Ok");

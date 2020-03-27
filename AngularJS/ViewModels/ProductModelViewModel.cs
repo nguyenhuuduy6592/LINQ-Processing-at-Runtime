@@ -2,7 +2,7 @@ using System;
 
 namespace AngularJS.Models
 {
-    public partial class ProductModelViewModel
+    public partial class ProductModelViewModel : BaseEntity
     {
         public int ProductModelID { get; set; }
 
