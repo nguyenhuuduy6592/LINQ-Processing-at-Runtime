@@ -16,9 +16,16 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
 textarea {
-    max-width: 280px;
+    min-height: 200px;
+    width: 100%;
+    resize: vertical;
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.overflow-x {
+    overflow-x: auto;
 }

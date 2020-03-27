@@ -5,8 +5,6 @@
     ViewData["Title"] = "Custom Query";
 }
 
-<h1>Index</h1>
-
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "customQuery" }))
 {
     <div class="form-group">
@@ -14,12 +12,23 @@
         @Html.TextAreaFor(m => m.Query, new { @class = "form-control" })
         <span for="Query" class="text-danger">@ViewBag.ErrorMessage</span>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary" />
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="PageSize" class="control-label"></label>
+            <select class="form-control" name="PageSize" id="PageSize">
+                <option>10</option>
+                <option>50</option>
+                <option>100</option>
+            </select>
+            <span for="PageSize" class="text-danger">@ViewBag.ErrorMessage</span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
     </div>
 }
 
-<div id="dataModel"></div>
+<div id="dataModel" class="m-t-10"></div>
 
 @section Scripts {
     <script type="text/javascript">

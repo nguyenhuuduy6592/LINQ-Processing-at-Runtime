@@ -1,6 +1,7 @@
 ﻿using AngularJS.Models;
 using AngularJS.Services;
 using AngularJS.ViewModels;
+using AngularJSCore.ViewModels;
 using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
@@ -210,16 +211,16 @@ namespace AngularJSCore.Helpers
         /// It compiles the user query as a in memory assembly by filling it in a simple class. Once compiled,
         /// source data is passed in to the assembly instance and excution result is collected.
         /// </summary>
-        public static IEnumerable<dynamic> GetFilteredData(string userQuery)
+        public static IEnumerable<dynamic> GetFilteredData(QueryModel model)
         {
-            if (string.IsNullOrEmpty(userQuery))
+            if (string.IsNullOrEmpty(model.Query))
             {
                 return new List<dynamic>();
             }
 
-            userQuery = userQuery.Trim();
+            model.Query = model.Query.Trim();
             var tableList = typeof(MyDbContext).GetProperties().Select(x => x.Name).ToList();
-            MatchCollection matches = Regex.Matches(userQuery, "\\s+in\\s+(\\w+)?");
+            MatchCollection matches = Regex.Matches(model.Query, "\\s+in\\s+(\\w+)?");
             if (matches.Count == 0)
             {
                 return new List<dynamic>();
@@ -242,13 +243,17 @@ namespace AngularJSCore.Helpers
                 };
 
             //complete class as string which will be compiled to an in memory assembly
+            if (model.PageSize > 0)
+            {
+                model.Query = "(" + model.Query + ").Take(" + model.PageSize + ")";
+            }
             string executeCode =
                 defaultNamespaces.Aggregate("", (current, defaultNamespace) => current + string.Format("using {0};\n", defaultNamespace)) +
                 @"namespace MyNamespace {
                     public class MyClass {
                         public IEnumerable<dynamic> FilterData(" + functionParameters + @") {
                             try{
-                                    var result = ((IEnumerable<dynamic>)(" + userQuery + @")).ToList();
+                                    var result = ((IEnumerable<dynamic>)(" + model.Query + @")).ToList();
                                     return result ;
                                }
                                 catch(Exception ex)

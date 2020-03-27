@@ -33,7 +33,7 @@ namespace AngularJS.Controllers
                 return View(result);
             }
 
-            var data = ParsingQueryHelpers.GetFilteredData(model.Query);
+            var data = ParsingQueryHelpers.GetFilteredData(model);
 
             ViewBag.ErrorMessage = "";
             result.Addresses = data;
