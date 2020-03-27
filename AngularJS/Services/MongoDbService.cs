@@ -1,5 +1,6 @@
 ﻿using AngularJS.Models;
 using AngularJS.Utilities;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace AngularJS.Services
         public readonly IMongoDatabase Database;
         public readonly IMongoCollection<T> Collection;
         private readonly string collectionName;
+
+        public MongoDbService()
+        {
+            var client = new MongoClient(GlobalConstants.BookstoreDatabaseSettings.ConnectionString);
+            Database = client.GetDatabase(GlobalConstants.BookstoreDatabaseSettings.DatabaseName);
+        }
 
         public MongoDbService(string collectionName)
         {
@@ -47,6 +54,17 @@ namespace AngularJS.Services
             Collection.InsertOne(x);
             return x;
         }
+
+        public bool IsCollectionExist(string collectionName)
+        {
+            var filter = new BsonDocument("name", collectionName);
+            var options = new ListCollectionNamesOptions { Filter = filter };
+
+            return !Database.ListCollectionNames(options).Any();
+        }
+
+        public void InsertMany(List<T> x) =>
+            Collection.InsertMany(x);
 
         public void Update(string id, T entity) =>
             Collection.ReplaceOne(x => x.Id == id, entity);

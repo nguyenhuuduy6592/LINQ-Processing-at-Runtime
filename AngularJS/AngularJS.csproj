@@ -208,6 +208,7 @@
     <Compile Include="Utilities\AutoMapperConfigs\GeneralAutoMapperConfigs.cs" />
     <Compile Include="Utilities\GlobalConstants.cs" />
     <Compile Include="ViewModels\AddressModel.cs" />
+    <Compile Include="ViewModels\CustomerAddressModel.cs" />
     <Compile Include="ViewModels\CustomerModel.cs" />
     <Compile Include="ViewModels\QueryModel.cs" />
     <Compile Include="ViewModels\QueryResult.cs" />
@@ -234,6 +235,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

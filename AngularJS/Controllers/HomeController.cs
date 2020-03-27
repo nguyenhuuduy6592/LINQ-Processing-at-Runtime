@@ -44,16 +44,27 @@ namespace AngularJS.Controllers
         {
             var config = GeneralAutoMapperConfigs.GetConfigs();
             var mapper = new Mapper(config);
+            var validationMongoDbService = new MongoDbService<AddressModel>();
 
             using (var db = new MyDbContext())
             {
-                new MongoDbService<AddressModel>("Addresses")
-                    .GetCollectionWithReCreation()
-                    .InsertMany(mapper.Map<List<AddressModel>>(db.Addresses.ToList()));
+                if (validationMongoDbService.IsCollectionExist("Addresses"))
+                {
+                    new MongoDbService<AddressModel>("Addresses")
+                        .InsertMany(mapper.Map<List<AddressModel>>(db.Addresses.ToList()));
+                }
 
-                new MongoDbService<CustomerModel>("Customers")
-                    .GetCollectionWithReCreation()
-                    .InsertMany(mapper.Map<List<CustomerModel>>(db.Customers.ToList()));
+                if (validationMongoDbService.IsCollectionExist("Customers"))
+                {
+                    new MongoDbService<CustomerModel>("Customers")
+                        .InsertMany(mapper.Map<List<CustomerModel>>(db.Customers.ToList()));
+                }
+
+                if (validationMongoDbService.IsCollectionExist("CustomerAddresses"))
+                {
+                    new MongoDbService<CustomerAddressModel>("CustomerAddresses")
+                        .InsertMany(mapper.Map<List<CustomerAddressModel>>(db.CustomerAddresses.ToList()));
+                }
             }
 
             return Content("Ok");

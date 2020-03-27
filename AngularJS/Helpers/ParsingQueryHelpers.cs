@@ -1,4 +1,6 @@
 ﻿using AngularJS.Models;
+using AngularJS.Services;
+using AngularJS.ViewModels;
 using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
@@ -308,13 +310,13 @@ namespace AngularJSCore.Helpers
                         switch (tableName[i])
                         {
                             case "Addresses":
-                                sourceData[i] = db.Addresses.AsNoTracking().ToList();
+                                sourceData[i] = new MongoDbService<AddressModel>(tableName[i]).Get();
                                 break;
                             case "CustomerAddresses":
-                                sourceData[i] = db.CustomerAddresses.AsNoTracking().ToList();
+                                sourceData[i] = new MongoDbService<CustomerAddressModel>(tableName[i]).Get();
                                 break;
                             case "Customers":
-                                sourceData[i] = db.Customers.AsNoTracking().ToList();
+                                sourceData[i] = new MongoDbService<CustomerModel>(tableName[i]).Get();
                                 break;
                         }
                     }

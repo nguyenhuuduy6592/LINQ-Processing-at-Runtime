@@ -12,6 +12,7 @@ namespace AngularJS.Utilities.AutoMapperConfigs
             {
                 cfg.CreateMap<Address, AddressModel>();
                 cfg.CreateMap<Customer, CustomerModel>();
+                cfg.CreateMap<CustomerAddress, CustomerAddressModel>();
             });
         }
     }
