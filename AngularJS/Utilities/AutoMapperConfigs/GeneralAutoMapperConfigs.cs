@@ -11,8 +11,15 @@ namespace AngularJS.Utilities.AutoMapperConfigs
             return new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Address, AddressViewModel>();
-                cfg.CreateMap<Customer, CustomerViewModel>();
                 cfg.CreateMap<CustomerAddress, CustomerAddressViewModel>();
+                cfg.CreateMap<Customer, CustomerViewModel>();
+                cfg.CreateMap<ProductCategory, ProductCategoryViewModel>();
+                cfg.CreateMap<ProductDescription, ProductDescriptionViewModel>();
+                cfg.CreateMap<ProductModelProductDescription, ProductModelProductDescriptionViewModel>();
+                cfg.CreateMap<ProductModel, ProductModelViewModel>();
+                cfg.CreateMap<Product, ProductViewModel>();
+                cfg.CreateMap<SalesOrderDetail, SalesOrderDetailViewModel>();
+                cfg.CreateMap<SalesOrderHeader, SalesOrderHeaderViewModel>();
             });
         }
     }
