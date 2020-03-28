@@ -5,6 +5,7 @@ using AngularJS.ViewModels;
 using AngularJSCore.Helpers;
 using AngularJSCore.ViewModels;
 using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -115,7 +116,35 @@ namespace AngularJS.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            var list = new List<CustomerViewModel>
+            {
+                new CustomerViewModel
+                {
+                    CompanyName = "Nguyen Huu Duy",
+                    CustomerID = 1,
+                    EmailAddress = "nguyenhuuduy@gmail",
+                    FirstName = "Nguyen",
+                    MiddleName = "Huu",
+                    LastName = "Duy",
+                    Id = "djhkdf87223h0dfnsdf9sdfn",
+                    ModifiedDate = DateTime.Now,
+                    NameStyle = true,
+                    PasswordHash = "asdasd",
+                    PasswordSalt = "1223",
+                    Phone = "0123456",
+                    rowguid = Guid.NewGuid(),
+                    SalesPerson = "DUy",
+                    Suffix = "Mr",
+                    Title = "Nothing"
+                }
+            };
+            for (int i = 0; i < 50; i++)
+            {
+                list.AddRange(list);
+            }
+            int identificador = GC.GetGeneration(list);
+            list.Clear();
+            GC.Collect(identificador, GCCollectionMode.Forced);
             return View();
         }
 
