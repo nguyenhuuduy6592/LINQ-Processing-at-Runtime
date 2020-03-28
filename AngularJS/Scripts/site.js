@@ -33,7 +33,7 @@
         // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
         for (var i = 0; i < col.length; i++) {
             var th = document.createElement("th");
-            th.innerHTML = col[i];
+            th.innerHTML = col[i].split(/(?=[A-Z])/).join(" ");
             hRow.appendChild(th);
         }
         tHead.appendChild(hRow);
