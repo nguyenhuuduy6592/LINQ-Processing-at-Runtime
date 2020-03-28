@@ -10,7 +10,6 @@
     <div class="form-group">
         <label for="Query" class="control-label"></label>
         @Html.TextAreaFor(m => m.Query, new { @class = "form-control" })
-        <span for="Query" class="text-danger">@ViewBag.ErrorMessage</span>
     </div>
     <div class="form-inline">
         <div class="form-group">
@@ -20,19 +19,34 @@
                 <option>50</option>
                 <option>100</option>
             </select>
-            <span for="PageSize" class="text-danger">@ViewBag.ErrorMessage</span>
         </div>
         <div class="form-group">
             <input type="submit" value="Submit" class="btn btn-primary" />
         </div>
     </div>
+    <span class="text-danger">@ViewBag.ErrorMessage</span>
 }
 
+<div class="form-inline">
+    <div class="form-group">
+        <label for="Fields" class="control-label">Field</label>
+        <select class="form-control" name="Fields" id="Fields"></select>
+        <label for="Fields" class="control-label">Value</label>
+        <select class="form-control" name="Values" id="Values"></select>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" id="viewGrid">Grid</button>
+        <button type="button" class="btn btn-primary" id="viewChart">Chart</button>
+    </div>
+</div>
+
 <div id="dataModel" class="m-t-10"></div>
+<canvas id="myChart" width="400" height="400"></canvas>
 
 @section Scripts {
     <script type="text/javascript">
-        var dataModel = @Html.Raw(JsonConvert.SerializeObject(Model.Addresses));
-        window.generateDynamicTable(dataModel);
+        window.dataModel = @Html.Raw(JsonConvert.SerializeObject(Model.Addresses));
+
+        window.getFieldList();
     </script>
 }
