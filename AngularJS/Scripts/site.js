@@ -78,12 +78,13 @@ window.generateChart = function () {
     var dataModelCount = window.dataModel.length;
     if (dataModelCount > 0) {
         var ctx = document.getElementById('myChart').getContext('2d');
+        ctx.height = 500;
         var field = $('#Fields').val();
         var value = $('#Values').val();
-        var fieldList = $.map(window.dataModel, function (val, index) {
+        var fieldList = $.map(window.dataModel, function (val) {
             return val[field];
         });
-        var valueList = $.map(window.dataModel, function (val, index) {
+        var valueList = $.map(window.dataModel, function (val) {
             return val[value];
         });
 
@@ -114,13 +115,8 @@ window.generateChart = function () {
                 }]
             },
             options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
     }
