@@ -40,6 +40,11 @@ namespace DynamicLINQ.Controllers
             return View();
         }
 
+        public ActionResult SampleQuery()
+        {
+            return View();
+        }
+
         public ActionResult TestListLengthLimit()
         {
             var list = new List<CustomerViewModel>

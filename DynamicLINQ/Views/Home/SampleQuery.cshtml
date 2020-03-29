@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "SampleQuery";
+}
+
+<h2>Sample Query 1</h2>
+<pre>
+from a in Addresses
+select new
+{
+	a.AddressLine1,
+	a.AddressLine2
+}
+</pre>
+
+<h2>Sample Query 2</h2>
+<pre>
+(from a in Addresses
+join c in CustomerAddresses on a.AddressID equals c.AddressID
+select new
+{
+	a.AddressLine1,
+	c.CustomerID,
+	c.AddressType
+}).Take(5)
+</pre>
+
+<h2>Sample Query 3</h2>
+<pre>
+(from a in Addresses
+join c in CustomerAddresses on a.AddressID equals c.AddressID
+select new
+{
+	a.AddressLine1,
+	c.CustomerID,
+	c.AddressType
+}).Take(5)
+</pre>
+
+<h2>Sample Query 4</h2>
+<pre>
+from a in Addresses
+join c in CustomerAddresses on a.AddressID equals c.AddressID
+select new
+{
+	a.AddressLine1,
+	c.CustomerID,
+	c.AddressType
+}
+</pre>
+
+<h2>Sample Query 5</h2>
+<pre>
+from a in Addresses
+join c in CustomerAddresses on a.AddressID equals c.AddressID
+join c1 in Customers on c.CustomerID equals c1.CustomerID
+select new
+{
+	a.AddressLine1,
+	c.CustomerID,
+	c.AddressType,
+	c1.FirstName,
+	c1.MiddleName,
+	c1.LastName
+}
+</pre>
+
+<h2>Sample Query 6</h2>
+<pre>
+from a in Addresses
+join c in CustomerAddresses on a.AddressID equals c.AddressID into c1
+	from c in c1.DefaultIfEmpty()
+select new
+{
+	a.AddressLine1,
+	CustomerID = CheckNull(c, "CustomerID"),
+	AddressType = CheckNull(c, "AddressType")
+}
+</pre>
+
+<h2>Sample Query 7</h2>
+<pre>
+from p in Addresses
+join c in CustomerAddresses on p.AddressID equals c.AddressID into g
+select new { AddressID = p.AddressID, Count = g.Count() }
+</pre>
+
+<h2>Sample Query 8</h2>
+<pre>
+from p in Addresses 
+let cCount =
+(
+  from c in CustomerAddresses
+  where p.AddressID == c.AddressID
+  select c
+).Count()
+select new { AddressID = p.AddressID, Count = cCount }
+</pre>
