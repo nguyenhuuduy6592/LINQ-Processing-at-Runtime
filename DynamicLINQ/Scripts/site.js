@@ -1,10 +1,10 @@
-﻿window.getFieldList = function () {
-    var dataModelCount = window.dataModel.length;
+﻿window.getFieldList = function (dataModel) {
+    var dataModelCount = dataModel.length;
     var col = []; // define an empty array
     if (dataModelCount > 0) {
         // retrieve column header
         for (var i = 0; i < dataModelCount; i++) {
-            for (var key in window.dataModel[i]) {
+            for (var key in dataModel[i]) {
                 if (col.indexOf(key) === -1) {
                     col.push(key);
                     $('#Fields').append(`<option value="${key}"> 
@@ -17,11 +17,11 @@
             }
         }
     }
-    window.fieldList = col;
+    return col;
 };
 
-window.generateDynamicTable = function () {
-    var dataModelCount = window.dataModel.length;
+window.generateDynamicTable = function (dataModel, elementId) {
+    var dataModelCount = dataModel.length;
     if (dataModelCount > 0) {
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
@@ -31,7 +31,7 @@ window.generateDynamicTable = function () {
         table.setAttribute('cellpadding', '5');
 
         // retrieve column header
-        var col = window.fieldList;
+        var col = getFieldList(dataModel);
 
         // CREATE TABLE HEAD .
         var tHead = document.createElement("thead");
@@ -53,22 +53,19 @@ window.generateDynamicTable = function () {
 
         // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
         for (var i = 0; i < dataModelCount; i++) {
-
             var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
-
 
             for (var j = 0; j < col.length; j++) {
                 var td = document.createElement("td");
-                td.innerHTML = window.dataModel[i][col[j]];
+                td.innerHTML = dataModel[i][col[j]];
                 bRow.appendChild(td);
             }
             tBody.appendChild(bRow)
-
         }
         table.appendChild(tBody);
 
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("dataModel");
+        var divContainer = document.getElementById(elementId);
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
     }
@@ -125,7 +122,7 @@ window.generateChart = function () {
 $("#viewGrid").on("click", function () {
     $("#dataModel").show();
     $("#myChart").hide();
-    generateDynamicTable();
+    generateDynamicTable(window.dataModel, "dataModel");
 });
 
 $("#viewChart").on("click", function () {

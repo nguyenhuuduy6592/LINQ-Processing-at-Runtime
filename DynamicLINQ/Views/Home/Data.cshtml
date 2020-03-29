@@ -1,0 +1,38 @@
+﻿@using AngularJS.App_Start
+@using Newtonsoft.Json;
+@{
+    ViewBag.Title = "Data";
+}
+
+<div class="form-inline">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" id="viewAddress">View Address</button>
+        <button type="button" class="btn btn-primary" id="viewCustomerAddress">View Customer Address</button>
+        <button type="button" class="btn btn-primary" id="viewCustomer">View Customer</button>
+    </div>
+</div>
+
+<div class="data-table" id="addressTable"></div>
+<div class="data-table" id="customerAddressTable"></div>
+<div class="data-table" id="customerTable"></div>
+
+@section Scripts {
+    <script type="text/javascript">
+        window.addresses = @Html.Raw(JsonConvert.SerializeObject(DataConfig.Addresses));
+        window.customerAddresses = @Html.Raw(JsonConvert.SerializeObject(DataConfig.CustomerAddresses));
+        window.customers = @Html.Raw(JsonConvert.SerializeObject(DataConfig.Customers));
+
+        $("#viewAddress").on('click', function () {
+            $('.data-table').empty();
+            window.generateDynamicTable(window.addresses, "addressTable");
+        });
+        $("#viewCustomerAddress").on('click', function () {
+            $('.data-table').empty();
+            window.generateDynamicTable(window.customerAddresses, "customerAddressTable");
+        });
+        $("#viewCustomer").on('click', function () {
+            $('.data-table').empty();
+            window.generateDynamicTable(window.customers, "customerTable");
+        });
+    </script>
+}

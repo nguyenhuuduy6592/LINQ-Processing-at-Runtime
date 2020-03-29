@@ -1,4 +1,4 @@
-﻿@model AngularJSCore.ViewModels.QueryResult
+﻿@model DynamicLINQ.ViewModels.QueryResult
 @using Newtonsoft.Json;
 
 @{
@@ -8,8 +8,21 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "customQuery" }))
 {
     <div class="form-group">
-        <label for="Query" class="control-label"></label>
-        @Html.TextAreaFor(m => m.Query, new { @class = "form-control" })
+        <div class="row">
+            <div class="col-md-8">
+                <label for="Query" class="control-label"></label>
+                @Html.TextAreaFor(m => m.Query, new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                <p>Tables List for query</p>
+                <ul>
+                    <li>Addresses</li>
+                    <li>CustomerAddresses</li>
+                    <li>Customers</li>
+                </ul>
+                <p>Sample data: @Html.ActionLink("Data", "Data", null, new { target = "_blank" })</p>
+            </div>
+        </div>
     </div>
     <div class="form-inline">
         <div class="form-group">
@@ -48,7 +61,5 @@
 @section Scripts {
     <script type="text/javascript">
         window.dataModel = @Html.Raw(JsonConvert.SerializeObject(Model.Addresses));
-
-        window.getFieldList();
     </script>
 }
