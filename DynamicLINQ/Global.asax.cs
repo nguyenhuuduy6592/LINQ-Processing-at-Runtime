@@ -1,4 +1,3 @@
-using AngularJS.App_Start;
 using DynamicLINQ.App_Start;
 using System.Web.Http;
 using System.Web.Mvc;

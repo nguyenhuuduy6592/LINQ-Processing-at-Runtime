@@ -1,6 +1,5 @@
-﻿using AngularJS.App_Start;
+﻿using DynamicLINQ.App_Start;
 using DynamicLINQ.Models;
-using DynamicLINQ.Services;
 using DynamicLINQ.ViewModels;
 using Microsoft.CSharp;
 using System;

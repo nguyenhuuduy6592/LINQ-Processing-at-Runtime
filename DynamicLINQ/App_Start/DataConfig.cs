@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AngularJS.App_Start
+namespace DynamicLINQ.App_Start
 {
     public static class DataConfig
     {
