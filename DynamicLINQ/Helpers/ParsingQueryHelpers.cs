@@ -1,4 +1,5 @@
-﻿using DynamicLINQ.Models;
+﻿using AngularJS.App_Start;
+using DynamicLINQ.Models;
 using DynamicLINQ.Services;
 using DynamicLINQ.ViewModels;
 using Microsoft.CSharp;
@@ -218,7 +219,7 @@ namespace DynamicLINQ.Helpers
             }
 
             model.Query = model.Query.Trim();
-            var tableList = typeof(MyDbContext).GetProperties().Select(x => x.Name).ToList();
+            var tableList = typeof(DataConfig).GetFields(BindingFlags.Public | BindingFlags.Static).Select(x => x.Name).ToList();
             MatchCollection matches = Regex.Matches(model.Query, "\\s+in\\s+(\\w+)?");
             if (matches.Count == 0)
             {
@@ -314,34 +315,13 @@ namespace DynamicLINQ.Helpers
                         switch (tableName[i])
                         {
                             case "Addresses":
-                                sourceData[i] = new MongoDbService<AddressViewModel>(tableName[i]).Get();
+                                sourceData[i] = DataConfig.Addresses;
                                 break;
                             case "Customers":
-                                sourceData[i] = new MongoDbService<CustomerViewModel>(tableName[i]).Get();
+                                sourceData[i] = DataConfig.Customers;
                                 break;
                             case "CustomerAddresses":
-                                sourceData[i] = new MongoDbService<CustomerAddressViewModel>(tableName[i]).Get();
-                                break;
-                            case "Products":
-                                sourceData[i] = new MongoDbService<ProductViewModel>(tableName[i]).Get();
-                                break;
-                            case "ProductCategories":
-                                sourceData[i] = new MongoDbService<ProductCategoryViewModel>(tableName[i]).Get();
-                                break;
-                            case "ProductDescriptions":
-                                sourceData[i] = new MongoDbService<ProductDescriptionViewModel>(tableName[i]).Get();
-                                break;
-                            case "ProductModels":
-                                sourceData[i] = new MongoDbService<ProductModelViewModel>(tableName[i]).Get();
-                                break;
-                            case "ProductModelProductDescriptions":
-                                sourceData[i] = new MongoDbService<ProductModelProductDescriptionViewModel>(tableName[i]).Get();
-                                break;
-                            case "SalesOrderDetails":
-                                sourceData[i] = new MongoDbService<SalesOrderDetailViewModel>(tableName[i]).Get();
-                                break;
-                            case "SalesOrderHeaders":
-                                sourceData[i] = new MongoDbService<SalesOrderHeaderViewModel>(tableName[i]).Get();
+                                sourceData[i] = DataConfig.CustomerAddresses;
                                 break;
                         }
                     }
