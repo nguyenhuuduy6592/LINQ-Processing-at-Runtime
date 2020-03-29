@@ -1,3 +1,4 @@
+using AngularJS.App_Start;
 using DynamicLINQ.App_Start;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -15,6 +16,7 @@ namespace DynamicLINQ
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DataConfig.GenerateData();
         }
     }
 }
